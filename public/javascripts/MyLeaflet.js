@@ -28,6 +28,8 @@ var Geoq = L.tileLayer.chinaProvider('Geoq.Normal.Map', {
 		minZoom: 5
 	});
 	///////////////////////////////////////////////////////////
+// 	http://localhost:6060/geoserver/Lake_fth/wms?service=WMS&version=1.1.0&request=GetMap&layers=Lake_fth%3Ars_fth_2016&bbox=166021.4430960765%2C0.0%2C833978.556903922%2C9329005.182450451&width=330&height=768&srs=EPSG%3A32649&format=image%2Fpng
+// 	http://localhost:6060/geoserver/Lake_fth/wms?service=WMS&version=1.1.0&request=GetMap&layers=Lake_fth%3Ars_fth_1998&bbox=166021.4430960765%2C0.0%2C833978.556903922%2C9329005.182450451&width=330&height=768&srs=EPSG%3A32649&format=image%2Fpng
 //地图服务地址WMS
 var url1 = 'http://47.106.158.161:6060/geoserver/Lake_fth/wms'
 //构建地图服务连接串
@@ -42,7 +44,7 @@ const bounderLayer1 = L.tileLayer.wms(url1, {
 ///////////////////////////////////////////////////////////
 //构建地图服务连接串
 const bounderLayer2 = L.tileLayer.wms(url1, {
-	layers: 'Lake_fth:Ars_fth_1998',
+	layers: 'Lake_fth:rs_fth_1998',
 	format: "image/png",
 	//		crs: L.CRS.EPSG3857,
 	opacity: 1,
@@ -95,8 +97,14 @@ L.control.layers(baseLayers, overlayLayers).addTo(map);
 // 	.setLeftLayers(Geoq)
 // 	.setRightLayers(satelliteMap)
 // 	.addTo(map);
+console.log(overlayLayers);
+console.log(overlayLayers._leaflet_id);
+//更改变量来实现
+var left = Geoq;
+var right = bounderLayer1;
+right = bounderLayer2;
 
-L.control.sideBySide(Geoq,bounderLayer1).addTo(map);
+L.control.sideBySide(left,right).addTo(map);
 
 
 
