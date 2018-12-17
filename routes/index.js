@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pgclient = require('./db');
 pgclient.getConnection();
-pgclient.getConnection();
+var db_lgy = require('./db_lgy');
 //var cors = require('cors');
 //router.use(cors());
 
@@ -24,7 +24,14 @@ router.get('/precipitation', function(req, res) {
 
 	res.render('MyEcharts');
 });
-//添加关联字段查询省GDP表的路由
+router.get('/PrecipitationEcharts', function(req, res) {
+
+	res.render('PrecipitationEcharts');
+});
+router.get('/PrecipitationEcharts_yearcomparison', function(req, res) {
+
+	res.render('PrecipitationEcharts_yearcomparison');
+});
 router.get('/PrecipitationYear', function(req, res) {
 	var year = req.query.year;
 	pgclient.select('precipitation', {
@@ -37,11 +44,27 @@ router.get('/PrecipitationYear', function(req, res) {
 				.json({
 					data: data
 				});
-
+		}
+	});
+});
+router.get('/PrecipitationMonth', function(req, res) {
+	var month = req.query.month;
+	pgclient.select('precipitation', {
+		'month': req.query.month
+	}, '', function(data) {
+		if (data[0] === undefined) {
+			res.send('返回空值');
+		} else {
+			res.status(200)
+				.json({
+					data: data
+				});
 		}
 	});
 
+
 });
+router.get('/PrecipitationAll',db_lgy.selectall);
 
 router.get('/introduce', function(req, res) {
 	res.render('introduce');

@@ -3,7 +3,7 @@ var pg = require('pg');
 //数据库连接串
 var conString = "postgres://postgres:313616@127.0.0.1:5432/futoulake"; 
 var client = new pg.Client(conString); 
-  
+
 var PG = function(){ 
     console.log("准备向****数据库连接..."); 
 }; 
@@ -133,6 +133,21 @@ PG.prototype.select = function(tablename,fields,returnfields,cb){
     str += field.join(" and "); 
     clientHelper(str,value,cb); 
 }; 
- 
+
+ // add query functions
+PG.prototype.SelectAll = function(req, res, next) {
+ 	db.any('select * from precipitation')
+ 		.then(function(data) {
+ 			res.status(200)
+ 				.json({
+ 					status: 'success',
+ 					data: data,
+ 					message: 'Retrieved ALL players'
+ 				});
+ 		})
+ 		.catch(function(err) {
+ 			console.log("err");
+ 		});
+ }
  module.exports = new PG(); 
  

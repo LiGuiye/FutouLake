@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+	<script type="text/javascript" src="javascripts/echarts.min.js"></script>
+	<!--jQuery  样式-->
+	<script type="text/javascript" src="javascripts/jquery-2.1.1.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+		<!-- Load Leaflet -->
+		<link rel="stylesheet" type="text/css" href="stylesheets/leaflet.css"/>
+		<script type="text/javascript" src="javascripts/leaflet.js"></script>
+		<script type="text/javascript" src="javascripts/leaflet.ChineseTmsProviders.js"></script>
+
+
+</head>
+<body id = "map"style = "position: absolute;margin-top: 70px;"  >
+		<div id="Mymap"style="width: 500px;	position: absolute;top: 0px;bottom: 0;"></div>
+		
+		<select id="select_year"style="margin-top:5px;margin-left: 510px;"> 
+		<option value="1998">1998年</option> 
+		<option value="2016">2016年</option> 
+		<option value="max">max</option> 
+		<option value="range">range</option> 
+		<option value="mean">mean</option> 
+		<option value="std">std</option> 
+		</select> 
+		
+		<select id="select_month"> 
+		<option value="jan">1月</option> 
+		<option value="feb">2月</option> 
+		<option value="mar">3月</option> 
+		<option value="apr">4月</option> 
+		<option value="may">5月</option>
+		<option value="jun">6月</option> 
+		<option value="jul">7月</option> 
+		<option value="aug">8月</option> 
+		<option value="sept">9月</option> 
+		<option value="oct">10月</option> 
+		<option value="nov">11月</option> 
+		<option value="dec">12月</option> 
+		</select> 
+		
+		<!-- <div id="home" style="width: 600px; height: 400px"> -->
+		<div id="echarts1" style="height: 200px; width:500px;
+		top: 20px;
+		left: 510px;">
+		</div>
+		<div id="echarts2" style="height: 200px; width:500px;
+		top: 40px;
+		left: 510px;">
+		</div>
+		
+
+
+	<script type="text/javascript" src="javascripts/PrecipitationEcharts_yearcomparison.js"></script>
+
+</body>
+</html>
