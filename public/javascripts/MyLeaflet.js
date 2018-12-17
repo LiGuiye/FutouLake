@@ -6,6 +6,7 @@ var map = L.map('map', {
 	//layers: [Geoq],
 	zoomControl: false
 });
+
 //==========================定义地图和地图标注========================================================
 //智图
 var Geoq = L.tileLayer.chinaProvider('Geoq.Normal.Map', {
@@ -47,6 +48,15 @@ const rs_fth_1998 = L.tileLayer.wms(url1, {
 	transparent: true,
 	attribution: "1998年ndvi © 2018 Hubu Liguiye"
 });
+const CHIRP19980102 = L.tileLayer.wms(url1, {
+	layers: 'Lake_fth:CHIRP19980102',
+	format: "image/png",
+	//		crs: L.CRS.EPSG3857,
+	opacity: 1,
+	transparent: true,
+	attribution: "1998年ndvi © 2018 Hubu Liguiye"
+});
+
 
 //////////////////////////////////等高线WFS服务//////////////////////////////////
 //完整路径
@@ -99,17 +109,28 @@ $.ajax({
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////控制线WFS服务//////////////////////////////////
 var shp_controlline_fth =
-	"http://47.106.158.161:6060/geoserver/Lake_fth/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Lake_fth%3Ashp_controlline_fth&maxFeatures=50&outputFormat=application%2Fjson";
+	"http://47.106.158.161:6060/geoserver/Lake_fth/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Lake_fth%3Ashp_controlline_fth&maxFeatures=500&outputFormat=application%2Fjson";
 var shp_controlline_pilepoint_fth =
-	"http://47.106.158.161:6060/geoserver/Lake_fth/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Lake_fth%3Ashp_controlline_pilepoint_fth&maxFeatures=50&outputFormat=application%2Fjson";
+	"http://47.106.158.161:6060/geoserver/Lake_fth/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Lake_fth%3Ashp_controlline_pilepoint_fth&maxFeatures=500&outputFormat=application%2Fjson";
 var shp_protectionline_fth =
-	"http://47.106.158.161:6060/geoserver/Lake_fth/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Lake_fth%3Ashp_protectionline_fth&maxFeatures=50&outputFormat=application%2Fjson";
+	"http://47.106.158.161:6060/geoserver/Lake_fth/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Lake_fth%3Ashp_protectionline_fth&maxFeatures=500&outputFormat=application%2Fjson";
 var shp_protectionline_pilepoint_fth =
-	"http://47.106.158.161:6060/geoserver/Lake_fth/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Lake_fth%3Ashp_protectionline_pilepoint_fth&maxFeatures=50&outputFormat=application%2Fjson";
+	"http://47.106.158.161:6060/geoserver/Lake_fth/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Lake_fth%3Ashp_protectionline_pilepoint_fth&maxFeatures=500&outputFormat=application%2Fjson";
 var myLayer_controlline = L.geoJSON(null, {});
 var myLayer_controlline_pilepoint = L.geoJSON(null, {});
 var myLayer_protectionline = L.geoJSON(null, {});
-var myLayer_protectionline_pilepoint = L.geoJSON(null, {});
+var myLayer_protectionline_pilepoint = L.geoJSON(null, {
+
+	onEachFeature: onEachFeature
+// 	function(feature, marker) {
+// 		marker.bindPopup(
+// 			"桩点序号"+feature.properties.num
+// 		);
+// // 		console.log("feature.properties:::::"+feature.properties.num);
+// // 		shiming = feature.properties.poemname;
+// 
+// 	}
+});
 $.ajax({
 	url: shp_controlline_fth, //WFS服务的完整路径
 	dataType: 'json',
@@ -143,6 +164,25 @@ $.ajax({
 	},
 });
 
+//点击地图要素事件回调函数
+	function onEachFeature(feature, marker) {
+		//获取选中要素的行政区编码
+		var code = feature.properties.num;
+		var ss2 = "url(../images/" + code + ".png)";
+		//新建弹出窗体并设置大小
+		var content = '<div style="width: 100px; height: 100px;" id="popupwindow"></div>'+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+"桩点序号:"+feature.properties.num;
+		//点击弹出窗口，并设置最大宽度，因为默认宽度为301，不一定够一个Echart的正常显示
+		marker.bindPopup(content, {maxWidth : 100});
+		//点击弹出信息窗口		
+		marker.on('popupopen',function(e){
+			
+			document.getElementById("popupwindow").style.backgroundImage = ss2;
+			document.getElementById("popupwindow").style.backgroundSize = "100px 100px";
+
+
+		});
+
+	}
 
 ////////////////////////////////////////////////////////////////////
 //右侧的图层控件
@@ -164,7 +204,7 @@ var overlayLayers = {
 	"斧头湖控制线桩点": myLayer_controlline_pilepoint,
 	"斧头湖保护线": myLayer_protectionline,
 	"斧头湖保护线桩点": myLayer_protectionline_pilepoint,
-
+	"CHIRP19980102":CHIRP19980102
 	
 };
 
