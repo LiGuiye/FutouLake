@@ -56,6 +56,14 @@ const CHIRP19980102 = L.tileLayer.wms(url1, {
 	transparent: true,
 	attribution: "1998年ndvi © 2018 Hubu Liguiye"
 });
+const rs_dem = L.tileLayer.wms(url1, {
+	layers: 'Lake_fth:rs_dem',
+	format: "image/png",
+	//		crs: L.CRS.EPSG3857,
+	opacity: 1,
+	transparent: true,
+	attribution: "dem © 2018 Hubu Liguiye"
+});
 
 
 //////////////////////////////////等高线WFS服务//////////////////////////////////
@@ -200,33 +208,29 @@ var overlayLayers = {
 	"22米等高线": myLayer_22m,
 	"23米等高线": myLayer_23m,
 	"24米等高线": myLayer_24m,
-	"斧头湖控制线": myLayer_controlline,
-	"斧头湖控制线桩点": myLayer_controlline_pilepoint,
-	"斧头湖保护线": myLayer_protectionline,
-	"斧头湖保护线桩点": myLayer_protectionline_pilepoint,
-	"CHIRP19980102":CHIRP19980102
+// 	"斧头湖控制线": myLayer_controlline,
+// 	"斧头湖控制线桩点": myLayer_controlline_pilepoint,
+// 	"斧头湖保护线": myLayer_protectionline,
+// 	"斧头湖保护线桩点": myLayer_protectionline_pilepoint,
+	// "CHIRP19980102":CHIRP19980102,
+	"DEM":rs_dem
 	
 };
 
 // //右边的图层控件
-L.control.layers(baseLayers).addTo(map);
-L.control.layers('', overlayLayers, {
-	position: 'topleft',
-	autoZIndex: true
-}).addTo(map);
+L.control.layers(baseLayers,overlayLayers).addTo(map);
+// L.control.layers('', overlayLayers, {
+// 	position: 'topleft',
+// 	autoZIndex: true
+// }).addTo(map);
 
-// L.control.sideBySide()
-// 	.setLeftLayers(Geoq)
-// 	.setRightLayers(satelliteMap)
-// 	.addTo(map);
-console.log(overlayLayers);
-console.log(baseLayers);
-//更改变量来实现
-var left = Geoq;
-var right = rs_fth_1998;
-// right = rs_fth_2016;
 
-L.control.sideBySide(left, right).addTo(map);
+// //更改变量来实现
+// var left = Geoq;
+// var right = rs_fth_1998;
+// // right = rs_fth_2016;
+// 
+// L.control.sideBySide(left, right).addTo(map);
 
 
 //地图监听

@@ -78,6 +78,9 @@ router.get('/goal', function(req, res) {
 router.get('/vector', function(req, res) {
 	res.render('vector');
 });
+router.get('/location', function(req, res) {
+	res.render('location');
+});
 router.route('/login')
 	.get(function(req, res) {
 		if (req.session.islogin) {

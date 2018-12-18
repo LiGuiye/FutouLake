@@ -75,7 +75,7 @@ function PrecipitationCharts(year, month) {
 				//指定图表的配置项和数据
 				var option1 = {
 					title: {
-						text: year + '年数据波动情况'
+						text: year + '年斧头湖降水数据波动情况'
 					},
 					tooltip: {
 						trigger: 'axis'
@@ -210,7 +210,7 @@ function PrecipitationCharts(year, month) {
 				//指定图表的配置项和数据
 				var option2 = {
 					title: {
-						text: month + '历年同期数据对比'
+						text: month + '斧头湖降水历年同期数据对比'
 					},
 					tooltip: {
 						trigger: 'axis'
@@ -300,13 +300,69 @@ var map = L.map('Mymap', {
 	//layers: [Geoq],
 	zoomControl: false
 });
+//智图
 var Geoq = L.tileLayer.chinaProvider('Geoq.Normal.Map', {
-	maxZoom: 18,
-	minZoom: 5
-}).addTo(map);
+		maxZoom: 18,
+		minZoom: 5
+	}).addTo(map),
+	//谷歌卫星影像
+	satelliteMap = L.tileLayer.chinaProvider('Google.Satellite.Map', {
+		maxZoom: 18,
+		minZoom: 5
+	}).addTo(map),
+	//天地图卫星影像
+	imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
+		maxZoom: 18,
+		minZoom: 5
+	}),
+	//天地图路网
+	imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
+		maxZoom: 18,
+		minZoom: 5
+	});
+//地图服务地址WMS
+var url1 = 'http://47.106.158.161:6060/geoserver/Lake_fth/wms'
+//构建地图服务连接串
+const rs_fth_2016 = L.tileLayer.wms(url1, {
+	layers: 'Lake_fth:rs_fth_2016',
+	format: "image/png",
+	//		crs: L.CRS.EPSG3857,
+	opacity: 1,
+	transparent: true,
+	attribution: "2016年ndvi © 2018 Hubu Liguiye"
+});
+const rs_fth_1998 = L.tileLayer.wms(url1, {
+	layers: 'Lake_fth:rs_fth_1998',
+	format: "image/png",
+	//		crs: L.CRS.EPSG3857,
+	opacity: 1,
+	transparent: true,
+	attribution: "1998年ndvi © 2018 Hubu Liguiye"
+});
+//右侧的图层控件
+var baseLayers = {
+	"智图": Geoq,
+	"谷歌卫星影像": satelliteMap,
+	"天地图卫星影像": imgm,
+	"天地图路网": imga,
+
+};
+var overlayLayers = {
+	"1998年ndvi": rs_fth_1998,
+	"2016年ndvi": rs_fth_2016,
+
+	
+};
 
 
+// //右边的图层控件
+L.control.layers(baseLayers,overlayLayers).addTo(map);
 
+var left = rs_fth_1998;
+var right = rs_fth_2016;
+// right = rs_fth_2016;
+
+L.control.sideBySide(left, right).addTo(map);
 
 
 ///////////////////////////////////////////////////////////////
@@ -366,7 +422,7 @@ $.ajax({
 			//指定图表的配置项和数据
 			var option1 = {
 				title: {
-					text: 1998 + '年数据波动情况'
+					text: 1998 + '年斧头湖降水数据波动情况'
 				},
 				tooltip: {
 					trigger: 'axis'
@@ -501,7 +557,7 @@ $.ajax({
 			//指定图表的配置项和数据
 			var option2 = {
 				title: {
-					text: 'jan' + '历年同期数据对比'
+					text: 'jan' + '斧头湖降水历年同期数据对比'
 				},
 				tooltip: {
 					trigger: 'axis'
