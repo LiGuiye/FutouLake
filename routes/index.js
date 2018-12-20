@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var pgclient = require('./db');
+var pgclient = require('dao/pgHelper');
 pgclient.getConnection();
 var db_lgy = require('./db_lgy');
 //var cors = require('cors');
@@ -19,7 +19,24 @@ router.get('/', function(req, res) {
 		test: res.locals.islogin
 	});
 });
-
+router.get('/ChangeMarker', function(req, res, next) {
+	if(req.cookies.islogin){
+		req.session.islogin=req.cookies.islogin;
+	}
+	if(req.session.islogin){
+		res.locals.islogin=req.session.islogin;
+	}
+	//查数据库userinfo表并获取表中所有数据
+	pgclient.select('userinfo','','',function (result) {
+		//console.log(result);
+		if(result[0]===undefined){
+			res.send('没有用户信息！');
+		}else{
+			//页面跳转时，如果要保留登录信息，需要增加session的传递
+			res.render('ChangeMarker', {title: '用户管理', datas: result,test:res.locals.islogin});
+		}
+	})
+});
 router.get('/precipitation', function(req, res) {
 
 	res.render('MyEcharts');
@@ -31,6 +48,30 @@ router.get('/PrecipitationEcharts', function(req, res) {
 router.get('/PrecipitationEcharts_yearcomparison', function(req, res) {
 
 	res.render('PrecipitationEcharts_yearcomparison');
+});
+router.get('/ndvi1998', function(req, res) {
+	res.render('ndvi1998');
+});
+router.get('/ndvi2016', function(req, res) {
+	res.render('ndvi2016');
+});
+router.get('/ndvi1998', function(req, res) {
+	res.render('ndvi1998');
+});
+router.get('/contourline21', function(req, res) {
+	res.render('contourline21');
+});
+router.get('/contourline22', function(req, res) {
+	res.render('contourline22');
+});
+router.get('/contourline23', function(req, res) {
+	res.render('contourline23');
+});
+router.get('/contourline24', function(req, res) {
+	res.render('contourline24');
+});
+router.get('/dem', function(req, res) {
+	res.render('dem');
 });
 router.get('/PrecipitationYear', function(req, res) {
 	var year = req.query.year;
@@ -65,6 +106,7 @@ router.get('/PrecipitationMonth', function(req, res) {
 
 });
 router.get('/PrecipitationAll',db_lgy.selectall);
+router.get('/protectionline_pilepoint',db_lgy.selectall_protectionline_pilepoint);
 
 router.get('/introduce', function(req, res) {
 	res.render('introduce');

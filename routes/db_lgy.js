@@ -60,6 +60,23 @@ function selectall(req, res) {
 		})
 
 }
+function selectall_protectionline_pilepoint(req, res) {
+	db.any('select * from protectionline_pilepoint')
+		.then(function(data) {
+			res.status(200)
+				.json({
+					data: data
+				});
+		})
+		.catch(function(err) {
+			res.json({
+				data: "搜不到"
+			})
+			console.log(table);
+		})
+
+}
+
 
 
 
@@ -136,5 +153,6 @@ module.exports = {
 	updatePlayer: updatePlayer,
 	deletePlayer: deletePlayer,
 	selectpoet: selectpoet,
-	selectall: selectall
+	selectall: selectall,
+	selectall_protectionline_pilepoint:selectall_protectionline_pilepoint
 };

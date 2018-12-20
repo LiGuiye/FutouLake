@@ -1,0 +1,39 @@
+<%- include header %>
+<%- include navbar %>	
+
+<div class="container"> 
+    <form class="form-horizontal" role="form" method="post" action="/users/update">
+      <input type="hidden" value="<%= datas[0].id %>" name="id"> 
+<!-- 			<div class="form-group">
+					<div class="input-group input-group-lg  col-xs-4 col-xs-offset-4">
+								<span class="input-group-addon">桩点号</span>
+								<input type="text" class="form-control" id="ss" name="idss" placeholder="请输入id" value="<%= datas[0].id %>">
+					</div>
+			</div> -->
+      <div class="form-group">
+          <div class="input-group input-group-lg  col-xs-4 col-xs-offset-4">
+                <span class="input-group-addon">经&nbsp;&nbsp;度</span>
+                <input type="text" class="form-control" id="longitude" name="longitude" placeholder="请输入经度" value="<%= datas[0].longitude %>">
+          </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group input-group-lg col-xs-4 col-xs-offset-4">
+                <span class="input-group-addon">纬&nbsp;&nbsp;度</span>
+                <input type="text" class="form-control" id="latitude" name="latitude" placeholder="请输入纬度" value="<%= datas[0].latitude%>">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group input-group-lg col-xs-4 col-xs-offset-4">
+                <span class="input-group-addon">位&nbsp;&nbsp;置</span>
+                <input type="text" class="form-control" id="location" name="location" placeholder="请输入位置" value="<%= datas[0].location%>">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-5">
+          <button type="submit" class="btn btn-info  btn-lg">修改</button>
+          <button type="reset" class="btn btn-warning  btn-lg">重置</button>
+        </div>
+      </div>
+    </form>
+</div>
+<%- include footer %>

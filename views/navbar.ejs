@@ -1,10 +1,10 @@
-<% include header %>
+
 <div id="navDIV" class="navbar-default">
 	<nav class="navbar default-layout-navbar">
 		<div class="container-fluid">
 			<div class="navbar-header" >
 				<a href = "/">
-					<img id="system_logo"  src="stylesheets/images/System_logo.png" alt="logo" />
+					<img id="system_logo"  src="/stylesheets/images/System_logo.png" alt="logo" />
 				</a>
 			</div>
 			
@@ -12,7 +12,7 @@
 			
 			<ul class="nav navbar-nav navbar-right"> 
 				<% if(locals.islogin){%>  
-				<a type="button" class="btn btn-light nav-btn" href=""><span class="glyphicon glyphicon-user">&nbsp;</span>Welcomeï¼nbsp;<%= test %></a>
+				<a type="button" class="btn btn-light nav-btn" href=""><span class="glyphicon glyphicon-user">&nbsp;</span>Welcome: <%= test %></a>
 				<a type="button" class="btn btn-light nav-btn" href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
 				<% }else{%>
 				<a type="button" class="btn btn-light nav-btn" href="/reg"><span class="glyphicon glyphicon-edit"></span> &nbsp;Register</a> 

@@ -294,8 +294,8 @@ function PrecipitationCharts(year, month) {
 ///////////////////////////////////////////////////////////////////
 //将地图内容与容器绑定
 var map = L.map('Mymap', {
-	center: [30.58141017095, 114.329577684],
-	zoom: 1,
+	center: [29.99, 114.30317402],
+	zoom: 11,
 	//默认图层
 	//layers: [Geoq],
 	zoomControl: false
@@ -304,17 +304,17 @@ var map = L.map('Mymap', {
 var Geoq = L.tileLayer.chinaProvider('Geoq.Normal.Map', {
 		maxZoom: 18,
 		minZoom: 5
-	}).addTo(map),
+	}),
 	//谷歌卫星影像
 	satelliteMap = L.tileLayer.chinaProvider('Google.Satellite.Map', {
 		maxZoom: 18,
 		minZoom: 5
-	}).addTo(map),
+	}),
 	//天地图卫星影像
 	imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
 		maxZoom: 18,
 		minZoom: 5
-	}),
+	}).addTo(map),
 	//天地图路网
 	imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
 		maxZoom: 18,

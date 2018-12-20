@@ -1,7 +1,7 @@
 //将地图内容与容器绑定
 var map = L.map('map', {
-	center: [30.58141017095, 114.329577684],
-	zoom: 1,
+	center: [29.99, 114.30317402],
+	zoom: 11,
 	//默认图层
 	//layers: [Geoq],
 	zoomControl: false
@@ -12,17 +12,17 @@ var map = L.map('map', {
 var Geoq = L.tileLayer.chinaProvider('Geoq.Normal.Map', {
 		maxZoom: 18,
 		minZoom: 5
-	}).addTo(map),
+	}),
 	//谷歌卫星影像
 	satelliteMap = L.tileLayer.chinaProvider('Google.Satellite.Map', {
 		maxZoom: 18,
 		minZoom: 5
-	}).addTo(map),
+	}),
 	//天地图卫星影像
 	imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
 		maxZoom: 18,
 		minZoom: 5
-	}),
+	}).addTo(map),
 	//天地图路网
 	imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
 		maxZoom: 18,
@@ -48,16 +48,8 @@ const rs_fth_1998 = L.tileLayer.wms(url1, {
 	transparent: true,
 	attribution: "1998年ndvi © 2018 Hubu Liguiye"
 });
-const CHIRP19980102 = L.tileLayer.wms(url1, {
-	layers: 'Lake_fth:CHIRP19980102',
-	format: "image/png",
-	//		crs: L.CRS.EPSG3857,
-	opacity: 1,
-	transparent: true,
-	attribution: "1998年ndvi © 2018 Hubu Liguiye"
-});
 const rs_dem = L.tileLayer.wms(url1, {
-	layers: 'Lake_fth:rs_dem',
+	layers: 'Lake_fth:test1',
 	format: "image/png",
 	//		crs: L.CRS.EPSG3857,
 	opacity: 1,
@@ -212,7 +204,6 @@ var overlayLayers = {
 // 	"斧头湖控制线桩点": myLayer_controlline_pilepoint,
 // 	"斧头湖保护线": myLayer_protectionline,
 // 	"斧头湖保护线桩点": myLayer_protectionline_pilepoint,
-	// "CHIRP19980102":CHIRP19980102,
 	"DEM":rs_dem
 	
 };
