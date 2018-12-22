@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
         res.locals.islogin=req.session.islogin;
     }
     //查数据库userinfo表并获取表中所有数据
-    pgclient.select('protectionline_pilepoint','','',function (result) {
+    pgclient.ss('protectionline_pilepoint','','',function (result) {
         //console.log(result);
         if(result[0]===undefined){
             res.send('没有用户信息！');

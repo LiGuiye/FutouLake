@@ -348,8 +348,8 @@ var baseLayers = {
 
 };
 var overlayLayers = {
-	"1998年ndvi": rs_fth_1998,
-	"2016年ndvi": rs_fth_2016,
+	"1998年ndwi": rs_fth_1998,
+	"2016年ndwi": rs_fth_2016,
 
 	
 };

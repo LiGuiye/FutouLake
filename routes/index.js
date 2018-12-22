@@ -37,6 +37,10 @@ router.get('/ChangeMarker', function(req, res, next) {
 		}
 	})
 });
+router.get('/test_index', function(req, res) {
+
+	res.render('test_index');
+});
 router.get('/precipitation', function(req, res) {
 
 	res.render('MyEcharts');
@@ -140,7 +144,6 @@ router.route('/login')
 	.post(function(req, res) {
 
 		result = null;
-		//pg.selectFun(client,req.body.username, function (result) {
 		pgclient.select('userinfo', {
 			'name': req.body.username
 		}, '', function(result) {
@@ -151,7 +154,7 @@ router.route('/login')
 					req.session.islogin = req.body.username;
 					res.locals.islogin = req.session.islogin;
 					res.cookie('islogin', res.locals.islogin, {
-						maxAge: 60000
+						maxAge: 600000
 					});
 					res.redirect('/');
 				} else {
@@ -185,7 +188,12 @@ router.route('/reg')
 				if (result[0] === undefined) {
 					res.send('注册没有成功请，重新注册');
 				} else {
-					res.redirect('/login');
+					req.session.islogin = req.body.username;
+					res.locals.islogin = req.session.islogin;
+					res.cookie('islogin', res.locals.islogin, {
+						maxAge: 600000
+					});
+					res.redirect('/');
 				}
 			});
 		});

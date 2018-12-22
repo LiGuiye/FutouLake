@@ -1,6 +1,8 @@
 <%- include header %>
 <%- include navbar %>
-<div class="container">
+	<!--Login\\Register-->
+	<link rel="stylesheet" href="stylesheets/LogRes.css">
+<!-- <div class="container">
 	<form class="form-horizontal" role="form" method="post">
 		<div class="form-group">
 			<div class="input-group input-group-lg  col-xs-4 col-xs-offset-4">
@@ -37,5 +39,38 @@
 			</div>
 		</div>
 	</form>
-</div>
+</div> -->
+<script type="text/javascript" src="javascripts/LogRes.js"></script>
+<script type="text/javascript" src="javascripts/jquery.carouFredSel-6.0.4-packed.js" ></script>
+<div id="wrapper_Pic">
+				<div class="carousel">
+					<div><img src="images/FTH01.jpg" width="700" height="420" border="0" /></div>
+					<div><img src="images/FTH02.jpg" width="700" height="420" border="0" /></div>
+					<div><img src="images/FTH03.jpg" width="700" height="420" border="0" /></div>
+					
+				</div>
+			</div>
+			
+			<div id="wrapper" class="login-page">
+				<div id="login_form" class="form">
+					<form class="login-form" role="form" method="post">
+						<input type="text" placeholder="用户名" id="username" name="username" required/>
+						<input type="password" placeholder="密码" id="password" name="password" required/>
+						<input type="password" placeholder="确认密码" id="password2" name="password2" required/>
+						<input type="text" placeholder="电子邮件" id="emial" />
+						<button type="submit">创建账户</button>
+						<p class="message">已经有了一个账户?
+							<a href="/login">立刻登录</a>
+						</p>
+					</form>
+<!-- 					<form class="login-form" role="form" method="post">
+						<input type="text" placeholder="用户名" id="username" />
+						<input type="password" placeholder="密码" id="password" />
+						<button id="login">登　录</button>
+						<p class="message">还没有账户?
+							<a href="#">立刻创建</a>
+						</p>
+					</form> -->
+				</div>
+			</div>
 <%- include footer %>

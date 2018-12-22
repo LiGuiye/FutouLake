@@ -7,7 +7,7 @@ var map = L.map('map', {
 	zoomControl: false
 });
 
-//==========================定义地图和地图标注========================================================
+//==========================定义地图和地图标注===================================
 //智图
 var Geoq = L.tileLayer.chinaProvider('Geoq.Normal.Map', {
 		maxZoom: 18,
@@ -49,7 +49,7 @@ const rs_fth_1998 = L.tileLayer.wms(url1, {
 	attribution: "1998年ndvi © 2018 Hubu Liguiye"
 });
 const rs_dem = L.tileLayer.wms(url1, {
-	layers: 'Lake_fth:test1',
+	layers: 'Lake_fth:rs_dem',
 	format: "image/png",
 	//		crs: L.CRS.EPSG3857,
 	opacity: 1,
@@ -194,8 +194,8 @@ var baseLayers = {
 
 };
 var overlayLayers = {
-	"1998年ndvi": rs_fth_1998,
-	"2016年ndvi": rs_fth_2016,
+	"1998年ndwi": rs_fth_1998,
+	"2016年ndwi": rs_fth_2016,
 	"21米等高线": myLayer_21m,
 	"22米等高线": myLayer_22m,
 	"23米等高线": myLayer_23m,
@@ -225,19 +225,19 @@ L.control.layers(baseLayers,overlayLayers).addTo(map);
 
 
 //地图监听
-map.on('click', function() {
-	console.log('--->click 点击事件')
-});
-map.on('mousedown', function() {
-	console.log('--->mousedown 按下不抬起')
-});
-map.on('mouseup', function() {
-	console.log('--->mouseup 按下抬起');
-});
-map.on('dblclick', function() {
-	console.log('--->dblclick 双击触发');
-});
-
+// map.on('click', function() {
+// 	console.log('--->click 点击事件')
+// });
+// map.on('mousedown', function() {
+// 	console.log('--->mousedown 按下不抬起')
+// });
+// map.on('mouseup', function() {
+// 	console.log('--->mouseup 按下抬起');
+// });
+// map.on('dblclick', function() {
+// 	console.log('--->dblclick 双击触发');
+// });
+// 
 
 
 $('a.ajax').click(function() {

@@ -10,7 +10,7 @@
     <div>
         <form action="/users/search" method="post">
             编号：<input type="text" name="s_id" id="s_id" value="" class="text"/> &nbsp;&nbsp;
-						位置：<input type="text" name="s_location" id="s_location" value="" class="text"/> &nbsp;&nbsp;
+						状态：<input type="text" name="s_location" id="s_location" value="" class="text"/> &nbsp;&nbsp;
             <button id="queryinfo" type="submit" class="glyphicon glyphicon-search" title="查询"></button>
         </form>
     </div>
@@ -25,7 +25,7 @@
         <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编号</th>
         <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经度</th>
         <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;纬度</th>
-        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位置</th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态(已勘点，未勘点，新增点)</th>
         <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/users/add" class="glyphicon glyphicon-plus" title="新增">新增</a>
         </th>
@@ -64,7 +64,7 @@
     <!-- 否则，提示重新登陆 -->
     <div id="myAlert" class="alert alert-warning">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>警告！</strong>登陆已超时，请登陆后访问。
+            <strong>警告！</strong>请登陆后访问。
     </div>
         
     <script>

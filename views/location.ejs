@@ -15,13 +15,27 @@
 		<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="javascripts/location.js" ></script>
 		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css"/>
-
+		<!-- 打印控件 -->
+		<script type="text/javascript" src="javascripts/leaflet.easyprint.js"></script>
 		<title>勘界定桩</title>
 	
 	</head>
 	<body id = "map"style = "position: absolute;margin-top: 70px;"  >
 		<div id="Mymap" style="	position: absolute;top: 0px;bottom: 0;right: 0;left: 0;"></div>
+		
+		<script>
+			var printer = L.easyPrint({
+				title:'打印地图',
+				sizeModes: ['A4Landscape', 'A4Portrait'],
+				filename: 'myMap',
+				exportOnly: true,
+				hideControlContainer: true,
+				tileWait:100,
+				defaultSizeTitles:{A4Landscape: 'A4横版', A4Portrait: 'A4 竖版'}
+			}).addTo(map);
+		</script>
 		<script type="text/javascript" src="javascripts/location.js" ></script>
+		
 	</body>
 
 </html>

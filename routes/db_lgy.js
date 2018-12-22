@@ -61,7 +61,7 @@ function selectall(req, res) {
 
 }
 function selectall_protectionline_pilepoint(req, res) {
-	db.any('select * from protectionline_pilepoint')
+	db.any('select * from protectionline_pilepoint order by id')
 		.then(function(data) {
 			res.status(200)
 				.json({

@@ -12,7 +12,8 @@
 		<script type="text/javascript" src="javascripts/leaflet.js"></script>
 		<script type="text/javascript" src="javascripts/leaflet.ChineseTmsProviders.js"></script>
 		<script type="text/javascript" src="/javascripts/leaflet-side-by-side.js"></script>
-
+		<!-- 打印控件 -->
+		<script type="text/javascript" src="javascripts/leaflet.easyprint.js"></script>
 
 
 </head>
@@ -53,6 +54,17 @@
 
 
 	<script type="text/javascript" src="javascripts/PrecipitationEcharts_yearcomparison.js"></script>
+			<script>
+				var printer = L.easyPrint({
+					title:'打印地图',
+					sizeModes: ['A4Landscape', 'A4Portrait'],
+					filename: 'myMap',
+					exportOnly: true,
+					hideControlContainer: true,
+					tileWait:100,
+					defaultSizeTitles:{A4Landscape: 'A4横版', A4Portrait: 'A4 竖版'}
+				}).addTo(map);
+			</script>
 
 </body>
 </html>
