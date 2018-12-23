@@ -6,7 +6,7 @@ var options = {
 	promiseLib: promise
 };
 var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://postgres:313616@localhost:5432/futoulake';
+var connectionString = 'postgres://postgres:313616@127.0.0.1:5432/futoulake';
 var db = pgp(connectionString);
 
 // add query functions
