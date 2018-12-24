@@ -107,10 +107,9 @@ $.ajax({
 		myLayer_protectionline_pilepoint.addData(data);
 	},
 });
-
 //点击地图要素事件回调函数
 function onEachFeature(feature, marker) {
-	//获取选中要素的行政区编码
+	//获取选中要素的编号
 	var code = feature.properties.num;
 	var erweima = "url(../images/" + code + ".png)";
 	//新建弹出窗体并设置大小
@@ -131,15 +130,9 @@ function onEachFeature(feature, marker) {
 		document.getElementById("popupwindow").style.backgroundImage = erweima;
 		document.getElementById("popupwindow").style.backgroundSize = "100px 100px";
 	});
-
-	// marker.enableTemporaryHighlight();
-
-
 }
-// var marker1 = L.marker([29.98859882, 114.30317402]).setIcon(yellowIcon).bindPopup('ssss').addTo(map);
-// marker1.enableTemporaryHighlight();
-
-//myLayer_protectionline.addTo(map);
+//var marker1 = L.marker([29.98859882, 114.30317402]).setIcon(yellowIcon).bindPopup('ssss').addTo(map);
+myLayer_protectionline.addTo(map);
 //myLayer_protectionline_pilepoint.addTo(map);
 ///////////////////////////转移至数据库中的点///////////////////////////////////
 var markernum = L.marker().openPopup();
@@ -153,10 +146,8 @@ $.ajax({
 	dataType: 'json',
 	outputFormat: 'text/javascript',
 	success: function(result) {
-
 		//测试是否返回数据
 		console.log(result.data[61].location);
-		//第一个表
 		if (result) {
 			for (var i = 1; i < result.data.length + 1; i++) {
 				latitude[i] = result.data[i - 1].latitude;
@@ -194,30 +185,9 @@ $.ajax({
 				}
 
 			}
-// 			if()
-// 			for(var i = 42;i<=62;i++){
-// 				
-// 			}
-			
-
-			//CreatMarker(latitude, longitude, result.data.length);
 		}
 	}
 });
-// 
-
-
-function CreatMarker(latitude, longitude, length) {
-	for (var i = 1; i < length; i++) {
-		markernum[i] = L.marker([latitude[i], longitude[i]], {
-			icon: redIcon
-		}).addTo(map);
-		//好像因为不能写在ajax后面？
-		// markernum[i].bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-	}
-	//ChangeColor(222); //只能写在这儿？？智障吧
-}
-
 
 function ChangeGreen(id) {
 	markernum[id].setIcon(greenIcon);
@@ -237,8 +207,6 @@ function ChangeGreen(id) {
 			document.getElementById("popupwindow").style.backgroundSize = "100px 100px";
 		});
 }
-
-
 ////////////////////////////////////////////////////////////////////
 //右侧的图层控件
 var baseLayers = {
@@ -248,7 +216,6 @@ var baseLayers = {
 	"谷歌卫星影像": satelliteMap,
 };
 var overlayLayers = {
-	//"myGroup": myGroup,
 	"斧头湖规划保护线": myLayer_protectionline,
 	"斧头湖规划保护线桩点": myLayer_protectionline_pilepoint,
 	"斧头湖规划控制线": myLayer_controlline,

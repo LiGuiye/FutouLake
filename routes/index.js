@@ -3,9 +3,6 @@ var router = express.Router();
 var pgclient = require('dao/pgHelper');
 pgclient.getConnection();
 var db_lgy = require('./db_lgy');
-//var cors = require('cors');
-//router.use(cors());
-
 /* GET home page. */
 router.get('/', function(req, res) {
 	if (req.cookies.islogin) {
@@ -19,38 +16,7 @@ router.get('/', function(req, res) {
 		test: res.locals.islogin
 	});
 });
-router.get('/ChangeMarker', function(req, res, next) {
-	if(req.cookies.islogin){
-		req.session.islogin=req.cookies.islogin;
-	}
-	if(req.session.islogin){
-		res.locals.islogin=req.session.islogin;
-	}
-	//查数据库userinfo表并获取表中所有数据
-	pgclient.select('userinfo','','',function (result) {
-		//console.log(result);
-		if(result[0]===undefined){
-			res.send('没有用户信息！');
-		}else{
-			//页面跳转时，如果要保留登录信息，需要增加session的传递
-			res.render('ChangeMarker', {title: '用户管理', datas: result,test:res.locals.islogin});
-		}
-	})
-});
-router.get('/test_index', function(req, res) {
-
-	res.render('test_index');
-});
-router.get('/precipitation', function(req, res) {
-
-	res.render('MyEcharts');
-});
-router.get('/PrecipitationEcharts', function(req, res) {
-
-	res.render('PrecipitationEcharts');
-});
 router.get('/PrecipitationEcharts_yearcomparison', function(req, res) {
-
 	res.render('PrecipitationEcharts_yearcomparison');
 });
 router.get('/ndvi1998', function(req, res) {
@@ -106,20 +72,12 @@ router.get('/PrecipitationMonth', function(req, res) {
 				});
 		}
 	});
-
-
 });
 router.get('/PrecipitationAll',db_lgy.selectall);
 router.get('/protectionline_pilepoint',db_lgy.selectall_protectionline_pilepoint);
 
 router.get('/introduce', function(req, res) {
 	res.render('introduce');
-});
-router.get('/background', function(req, res) {
-	res.render('background');
-});
-router.get('/goal', function(req, res) {
-	res.render('goal');
 });
 router.get('/vector', function(req, res) {
 	res.render('vector');

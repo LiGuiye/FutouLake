@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
     }
-    //查数据库userinfo表并获取表中所有数据
+    //查数据库protectionline_pilepoint表并获取表中所有数据
     pgclient.ss('protectionline_pilepoint','','',function (result) {
         //console.log(result);
         if(result[0]===undefined){
@@ -92,8 +92,7 @@ router.post('/update', function (req, res) {
     var longitude = req.body.longitude;
     var latitude = req.body.latitude;
     var location = req.body.location;
-	console.log(id+','+longitude+','+latitude+','+location)
-    //var professional = req.body.professional;
+	console.log(id+','+longitude+','+latitude+','+location);
     pgclient.update('protectionline_pilepoint',{'id':id},{'longitude':longitude,'latitude':latitude,'location':location},function (err) {
         if (err !='') {
             res.send("修改失败："+err)
@@ -107,11 +106,9 @@ router.post('/update', function (req, res) {
  * 查
  */
 router.post('/search', function (req, res) {
-    //获取页面中搜索框中的用户名参数
+    //获取页面中搜索框中的参数
     var id = req.body.s_id;
 	var location = req.body.s_location;
-    //获取页面中搜索框中的电话号码参数
-    // var telephone = req.body.s_telephone;
      //页面跳转时，如果要保留登录信息，需要增加session的传递
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
@@ -120,9 +117,9 @@ router.post('/search', function (req, res) {
         res.locals.islogin=req.session.islogin;
     }
     
-    //如果姓名和电话都为空，则查询所有信息；
+    //如果id和location都为空，则查询所有信息；
     if(!id&&!location){
-        //查数据库userinfo表并获取表中所有数据
+        //查数据库protectionline_pilepoint表并获取表中所有数据
         pgclient.select('protectionline_pilepoint','','',function (result) {
             //console.log(result);
             if(result[0]===undefined){
